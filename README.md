@@ -19,6 +19,7 @@ Ensure system availability and reliability
 Align system design with GDPR principles
 
 🔐 CIA Triad Implementation
+
 1️⃣ Confidentiality (Privacy & Data Protection)
 Sensitive patient data is masked or anonymized
 Optional Fernet encryption for reversible anonymization
