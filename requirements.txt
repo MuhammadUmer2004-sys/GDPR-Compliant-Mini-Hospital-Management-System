@@ -1,0 +1,5 @@
+streamlit          # Web framework for building interactive dashboards and UI
+pandas             # Used for data handling, tables, and DataFrame operations
+sqlalchemy         # Database ORM/engine helper (you may use it for advanced DB operations)
+cryptography       # Provides Fernet encryption for reversible anonymization
+werkzeug           # Provides secure password hashing utilities (generate_password_hash, check_password_hash)
