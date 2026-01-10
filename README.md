@@ -93,13 +93,20 @@ Admin reviews logs and exports data securely
 
 hospital_dashboard/
 │
-├── app.py                  # Main Streamlit app
+├── app.py   # Main Streamlit app
+
 ├── database.db             # SQLite database
+
 ├── auth.py                 # Authentication & RBAC
+
 ├── anonymization.py        # Masking & encryption logic
+
 ├── logs.py                 # Logging & audit trail
+
 ├── utils.py                # Helper functions
+
 ├── requirements.txt
+
 └── README.md
 
 🚀 How to Run the Project
