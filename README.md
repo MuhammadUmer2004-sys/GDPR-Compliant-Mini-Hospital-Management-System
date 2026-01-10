@@ -1,4 +1,5 @@
 🏥 GDPR-Compliant Mini Hospital Management System
+
 Implementing the CIA Triad (Confidentiality, Integrity, Availability)
 
 📌 Project Overview
