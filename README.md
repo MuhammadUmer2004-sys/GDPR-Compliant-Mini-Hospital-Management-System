@@ -65,11 +65,13 @@ cryptography (Fernet)
 Visualization (Optional): Streamlit charts
 
 🗂️ Database Schema
+
 Users Table
 user_id	username	password	role
 1	admin	admin123	admin
 2	Dr_Bob	doc123	doctor
 3	Alice_recep	rec123	receptionist
+
 Patients Table
 
 | patient_id | name | contact | diagnosis | anonymized_name | anonymized_contact | date_added |
