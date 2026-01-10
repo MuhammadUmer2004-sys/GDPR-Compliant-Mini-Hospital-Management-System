@@ -110,8 +110,11 @@ hospital_dashboard/
 └── README.md
 
 🚀 How to Run the Project
+
 1️⃣ Create Virtual Environment (Optional)
+
 python -m venv venv
+
 source venv/bin/activate   # Windows: venv\Scripts\activate
 
 2️⃣ Install Dependencies
