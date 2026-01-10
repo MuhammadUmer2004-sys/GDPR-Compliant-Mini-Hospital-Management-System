@@ -90,6 +90,7 @@ All actions are logged automatically
 Admin reviews logs and exports data securely
 
 📁 Project Structure
+
 hospital_dashboard/
 │
 ├── app.py                  # Main Streamlit app
