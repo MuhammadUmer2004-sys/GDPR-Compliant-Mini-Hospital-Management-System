@@ -57,12 +57,19 @@ CSV export / backup option for recovery
 Displays last synchronization time / uptime in dashboard footer
 
 🛠️ Tech Stack
+
 Frontend: Streamlit
+
 Backend: Python
+
 Database: SQLite / MySQL
+
 Security:
+
 hashlib
+
 cryptography (Fernet)
+
 Visualization (Optional): Streamlit charts
 
 🗂️ Database Schema
