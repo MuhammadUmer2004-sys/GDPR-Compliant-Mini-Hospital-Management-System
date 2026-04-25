@@ -25,7 +25,9 @@ export function decrypt(text: string): string {
 export function hashName(name: string): string {
   if (!name) return '';
   const hash = crypto.createHash('sha256').update(name).digest('hex');
-  return `ANON_${hash.substring(0, 6)}`;
+  // Take first 4 characters and convert to a number to get 4 digits
+  const num = parseInt(hash.substring(0, 4), 16) % 10000;
+  return `ANON_${num.toString().padStart(4, '0')}`;
 }
 
 export function maskContact(contact: string): string {

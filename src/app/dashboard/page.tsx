@@ -6,7 +6,7 @@ import {
   Users, PlusCircle, ShieldCheck, ListFilter, 
   Download, BarChart3, Info, LogOut, Search,
   Activity, Clock, User, Trash2, Edit, RefreshCw, 
-  Database, ShieldAlert, CheckCircle2, AlertCircle
+  Database, ShieldAlert, CheckCircle2, AlertCircle, Lock
 } from 'lucide-react';
 
 export default function DashboardPage() {
