@@ -13,7 +13,7 @@ export async function PUT(
   }
 
   const { name, contact, diagnosis } = await request.json();
-  const id = parseInt((await params).id);
+  const id = (await params).id;
 
   // If receptionist and diagnosis is the placeholder, don't update it
   const updateData: any = { name, contact };
@@ -51,7 +51,7 @@ export async function DELETE(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const id = parseInt((await params).id);
+  const id = (await params).id;
 
   await prisma.patient.delete({
     where: { id },

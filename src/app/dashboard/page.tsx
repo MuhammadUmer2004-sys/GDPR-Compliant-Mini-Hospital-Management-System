@@ -102,7 +102,7 @@ export default function DashboardPage() {
     a.click();
   };
 
-  const deletePatient = async (id: number) => {
+  const deletePatient = async (id: string) => {
     if (!confirm('Are you sure you want to delete this patient?')) return;
     await fetch(`/api/patients/${id}`, { method: 'DELETE' });
     refreshData();

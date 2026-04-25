@@ -1,25 +1,21 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  username String  @unique
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  username String @unique
   password String
-  role     String
-  logs     Log[]
+  role     String // 'admin', 'doctor', 'receptionist'
 }
 
 model Patient {
-  id                Int      @id @default(autoincrement())
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
   name              String
   contact           String
   diagnosis         String
@@ -29,11 +25,10 @@ model Patient {
 }
 
 model Log {
-  id        Int      @id @default(autoincrement())
-  userId    Int?
-  user      User?    @relation(fields: [userId], references: [id])
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String?  @db.ObjectId
   role      String
   action    String
   timestamp DateTime @default(now())
-  details   String?
+  details   String
 }
