@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      await login({ id: user.id, username: user.username, role: user.role });
+      await login({ id: user.id as any, username: user.username, role: user.role });
       
       // Log the action
       await prisma.log.create({
