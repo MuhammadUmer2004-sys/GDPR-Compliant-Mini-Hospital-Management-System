@@ -12,6 +12,7 @@ export async function POST(request: Request) {
     });
 
     if (user && (await bcrypt.compare(password, user.password))) {
+      // @ts-ignore - Build ID: V2_MONGO_FIX
       await login({ id: user.id as any, username: user.username, role: user.role });
       
       // Log the action
