@@ -23,12 +23,17 @@ export async function GET() {
         dateAdded: p.dateAdded,
       };
     }
-    // Receptionist
-    return {
-      id: p.id,
-      diagnosis: p.diagnosis,
-      dateAdded: p.dateAdded,
-    };
+    // Receptionist: Can see names/contacts to manage records, but NO diagnosis
+    if (session.role === 'receptionist') {
+      return {
+        id: p.id,
+        name: p.name,
+        contact: p.contact,
+        diagnosis: 'HIDDEN (Sensitive)',
+        dateAdded: p.dateAdded,
+      };
+    }
+    return { id: p.id, dateAdded: p.dateAdded };
   });
 
   return NextResponse.json(filteredPatients);

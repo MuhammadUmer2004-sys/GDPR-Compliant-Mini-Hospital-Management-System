@@ -15,12 +15,16 @@ export async function PUT(
   const { name, contact, diagnosis } = await request.json();
   const id = parseInt((await params).id);
 
+  // If receptionist and diagnosis is the placeholder, don't update it
+  const updateData: any = { name, contact };
+  if (diagnosis !== 'HIDDEN (Sensitive)') {
+    updateData.diagnosis = diagnosis;
+  }
+
   const patient = await prisma.patient.update({
     where: { id },
     data: {
-      name,
-      contact,
-      diagnosis,
+      ...updateData,
       anonymizedName: hashName(name),
       anonymizedContact: maskContact(contact),
     },

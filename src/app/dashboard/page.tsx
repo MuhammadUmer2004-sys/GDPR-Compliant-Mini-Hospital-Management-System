@@ -206,34 +206,32 @@ export default function DashboardPage() {
                 <thead>
                   <tr style={{ color: 'var(--secondary)', fontSize: '13px', fontWeight: '600' }}>
                     <th style={{ padding: '12px', textAlign: 'left' }}>ID</th>
-                    {session?.role === 'admin' && <th style={{ padding: '12px', textAlign: 'left' }}>Full Name</th>}
+                    {session?.role !== 'doctor' && <th style={{ padding: '12px', textAlign: 'left' }}>Full Name</th>}
                     {session?.role === 'doctor' && <th style={{ padding: '12px', textAlign: 'left' }}>Anonymized Name</th>}
                     <th style={{ padding: '12px', textAlign: 'left' }}>Diagnosis</th>
-                    <th style={{ padding: '12px', textAlign: 'left' }}>Status</th>
                     <th style={{ padding: '12px', textAlign: 'left' }}>Date Added</th>
-                    {session?.role === 'admin' && <th style={{ padding: '12px', textAlign: 'right' }}>Actions</th>}
+                    {['admin', 'receptionist'].includes(session?.role) && <th style={{ padding: '12px', textAlign: 'right' }}>Actions</th>}
                   </tr>
                 </thead>
                 <tbody>
                   {patients.map((p) => (
                     <tr key={p.id} className="glass" style={{ background: 'rgba(255,255,255,0.4)', transition: 'transform 0.2s' }}>
                       <td style={{ padding: '16px', borderRadius: '12px 0 0 12px', fontWeight: 'bold' }}>#{p.id}</td>
-                      {session?.role === 'admin' && <td style={{ padding: '16px' }}>{p.name}</td>}
+                      {session?.role !== 'doctor' && <td style={{ padding: '16px' }}>{p.name}</td>}
                       {session?.role === 'doctor' && <td style={{ padding: '16px' }}>
                         <span style={{ background: '#dbeafe', color: '#1e40af', padding: '4px 8px', borderRadius: '6px', fontSize: '12px', fontWeight: '600' }}>{p.anonymizedName}</span>
                       </td>}
-                      <td style={{ padding: '16px' }}>{p.diagnosis}</td>
                       <td style={{ padding: '16px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#10b981', fontSize: '13px', fontWeight: '600' }}>
-                          <CheckCircle2 size={14} /> Active
-                        </div>
+                        {p.diagnosis === 'HIDDEN (Sensitive)' ? (
+                          <span style={{ color: 'var(--secondary)', fontStyle: 'italic', fontSize: '12px' }}>Locked (Confidential)</span>
+                        ) : p.diagnosis}
                       </td>
                       <td style={{ padding: '16px', fontSize: '13px', color: 'var(--secondary)' }}>{new Date(p.dateAdded).toLocaleDateString()}</td>
-                      {session?.role === 'admin' && (
+                      {['admin', 'receptionist'].includes(session?.role) && (
                         <td style={{ padding: '16px', borderRadius: '0 12px 12px 0', textAlign: 'right' }}>
                           <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                             <button onClick={() => { setEditingPatient(p); setActiveTab('Manage Records'); }} className="btn glass" style={{ padding: '6px' }}><Edit size={14} /></button>
-                            <button onClick={() => deletePatient(p.id)} className="btn glass" style={{ padding: '6px', color: '#ef4444' }}><Trash2 size={14} /></button>
+                            {session?.role === 'admin' && <button onClick={() => deletePatient(p.id)} className="btn glass" style={{ padding: '6px', color: '#ef4444' }}><Trash2 size={14} /></button>}
                           </div>
                         </td>
                       )}
@@ -356,17 +354,26 @@ export default function DashboardPage() {
               <div className="glass" style={{ padding: '24px' }}>
                 <h3 style={{ marginBottom: '24px' }}>Real-time System Activity</h3>
                 <div style={{ height: '300px', display: 'flex', alignItems: 'flex-end', gap: '20px', paddingBottom: '40px', borderBottom: '2px solid var(--card-border)' }}>
-                  {/* Simple CSS-based bar chart for activity */}
-                  {[40, 70, 45, 90, 65, 80, 100].map((h, i) => (
-                    <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                      <div style={{ width: '100%', height: `${h}%`, background: 'var(--primary)', borderRadius: '8px 8px 0 0', opacity: 0.7 + (h/300) }}></div>
-                      <span style={{ fontSize: '11px', color: 'var(--secondary)' }}>Day {i+1}</span>
-                    </div>
-                  ))}
+                  {/* Real-time bar chart based on log activity */}
+                  {Array.from({ length: 7 }).map((_, i) => {
+                    const count = logs.filter(l => {
+                      const d = new Date(l.timestamp);
+                      const today = new Date();
+                      today.setDate(today.getDate() - (6 - i));
+                      return d.toDateString() === today.toDateString();
+                    }).length;
+                    const height = Math.min(100, (count / (logs.length || 1)) * 500 + 10);
+                    return (
+                      <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                        <div style={{ width: '100%', height: `${height}%`, background: 'var(--primary)', borderRadius: '8px 8px 0 0', opacity: 0.5 + (height/200), transition: 'height 0.5s ease' }}></div>
+                        <span style={{ fontSize: '11px', color: 'var(--secondary)' }}>Day {i+1}</span>
+                      </div>
+                    );
+                  })}
                 </div>
                 <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', gap: '32px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px' }}>
-                    <div style={{ width: '12px', height: '12px', borderRadius: '3px', background: 'var(--primary)' }}></div> Activity Level
+                    <div style={{ width: '12px', height: '12px', borderRadius: '3px', background: 'var(--primary)' }}></div> Log Events per Day
                   </div>
                 </div>
               </div>
