@@ -5,7 +5,7 @@ import { hashName, encrypt, maskContact } from '@/lib/crypto';
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getSession();
   if (!session || !['admin', 'receptionist'].includes(session.role)) {
@@ -44,7 +44,7 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getSession();
   if (!session || session.role !== 'admin') {
