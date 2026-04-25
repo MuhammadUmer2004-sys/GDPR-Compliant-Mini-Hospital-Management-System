@@ -289,10 +289,19 @@ export default function DashboardPage() {
           )}
 
           {activeTab === 'Audit Logs' && (
-             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+             <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+              <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+                <div style={{ flex: 1 }}>
+                  <h3 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '8px' }}>Integrity Audit Trails</h3>
+                  <p style={{ color: 'var(--secondary)' }}>Monitoring all data transactions and access points to ensure system accountability and CIA triad compliance.</p>
+                </div>
+                <div style={{ width: '120px', height: '120px' }}>
+                  <img src="/audit-hero.png" alt="Audit" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                </div>
+              </div>
               <div className="glass" style={{ padding: '16px', background: 'rgba(239, 68, 68, 0.05)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <ShieldAlert color="#ef4444" />
-                <span style={{ fontSize: '14px', fontWeight: '600', color: '#b91c1c' }}>Integrity Audit Trail: Monitoring all data transactions and access.</span>
+                <span style={{ fontSize: '14px', fontWeight: '600', color: '#b91c1c' }}>Real-time Integrity Monitoring: All actions are immutable and timestamped.</span>
               </div>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
@@ -351,6 +360,15 @@ export default function DashboardPage() {
 
           {activeTab === 'Analysis' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+              <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+                <div style={{ flex: 1 }}>
+                  <h3 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '8px' }}>System Activity Analysis</h3>
+                  <p style={{ color: 'var(--secondary)' }}>Visualizing system load and log distribution to ensure service availability and identify potential security anomalies.</p>
+                </div>
+                <div style={{ width: '150px', height: '150px' }}>
+                  <img src="/analysis-hero.png" alt="Analysis" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                </div>
+              </div>
               <div className="glass" style={{ padding: '32px', background: 'white' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
                   <h3 style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><BarChart3 color="var(--primary)" /> System Traffic Analysis</h3>
