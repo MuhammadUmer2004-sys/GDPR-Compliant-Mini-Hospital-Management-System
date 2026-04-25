@@ -30,10 +30,10 @@ export default function LoginPage() {
       });
 
       const data = await res.json();
-      if (data.success) {
+      if (res.ok) {
         router.push('/dashboard');
       } else {
-        setError(data.error || 'Invalid credentials');
+        setError(data.error || 'An error occurred. Please try again.');
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
