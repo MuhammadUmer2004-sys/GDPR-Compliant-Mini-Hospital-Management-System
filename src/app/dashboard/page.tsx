@@ -414,8 +414,19 @@ export default function DashboardPage() {
           )}
 
           {activeTab === 'About GDPR' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', lineHeight: '1.6' }}>
-              <h2 style={{ color: 'var(--primary)' }}>🧭 Data Privacy & CIA Compliance</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', lineHeight: '1.6' }}>
+              <div style={{ display: 'flex', gap: '40px', alignItems: 'center', marginBottom: '20px' }}>
+                <div style={{ flex: 1 }}>
+                  <h2 style={{ color: 'var(--primary)', fontSize: '32px', fontWeight: '900', marginBottom: '16px' }}>🧭 Data Privacy & CIA Compliance</h2>
+                  <p style={{ fontSize: '16px', color: 'var(--secondary)' }}>
+                    Our system is built on the core pillars of Information Security, ensuring that every patient record is handled with the highest standard of care and legal compliance.
+                  </p>
+                </div>
+                <div style={{ width: '200px', height: '200px' }}>
+                  <img src="/gdpr-hero.png" alt="GDPR Shield" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                </div>
+              </div>
+
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
                 <div className="glass" style={{ padding: '20px' }}>
                   <h4 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}><Lock size={18} /> Confidentiality</h4>
