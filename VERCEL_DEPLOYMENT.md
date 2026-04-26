@@ -3,15 +3,16 @@
 Since we have migrated your project to **Next.js and Prisma**, the deployment to Vercel is highly streamlined. Follow these steps to take your project live.
 
 ## 1. Database Setup (CRITICAL)
-Vercel's serverless environment does not support local SQLite files (`dev.db`). You must use a hosted database.
-- **Recommended**: [Vercel Postgres](https://vercel.com/storage/postgres) or [Supabase](https://supabase.com/).
-- **Step**: Create a database and copy the **Connection String** (starts with `postgres://...` or `postgresql://...`).
+Vercel's serverless environment does not support local SQLite files. This project is configured to use **MongoDB**.
+- **Recommended**: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) (Free tier is perfect).
+- **Step**: Create a cluster and copy the **Connection String** (starts with `mongodb+srv://...`).
+- **IP Whitelist**: In MongoDB Atlas, you **MUST** go to "Network Access" and add `0.0.0.0/0` (Allow access from anywhere) so Vercel can connect.
 
 ## 2. Prepare `schema.prisma`
-In your `prisma/schema.prisma` file, change the provider to match your new database:
+Your `prisma/schema.prisma` file is already pre-configured for MongoDB:
 ```prisma
 datasource db {
-  provider = "postgresql" // or "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 ```

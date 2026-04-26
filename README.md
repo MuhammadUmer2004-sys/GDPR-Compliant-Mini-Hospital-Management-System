@@ -7,19 +7,19 @@ This is a modern, professional migration of the original Hospital Management Sys
 1. **Push this repository to GitHub.**
 2. **Connect to Vercel**: Import the project in Vercel.
 3. **Database Setup**:
-   - Vercel uses a serverless environment, so the local SQLite `dev.db` will not work.
-   - Go to the **Storage** tab in your Vercel project and create a **Vercel Postgres** database.
-   - Vercel will automatically add the `POSTGRES_URL` and other environment variables.
+   - This project uses **MongoDB Atlas**.
+   - Create a free cluster on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+   - Get your connection string (e.g., `mongodb+srv://...`).
 4. **Environment Variables**:
-   - Add `JWT_SECRET` (any random string).
-   - Add `ENCRYPTION_KEY` (a 32-character string for AES-256).
-   - Change `DATABASE_URL` in your `.env` (or Vercel settings) to point to the Postgres URL.
-5. **Switch to Postgres**:
-   - In `prisma/schema.prisma`, change the provider from `"sqlite"` to `"postgresql"`.
-   - Change the `url` to `env("POSTGRES_PRISMA_URL")` or `env("DATABASE_URL")` as provided by Vercel.
+   - Go to **Settings > Environment Variables** in Vercel.
+   - Add `DATABASE_URL`: Your MongoDB connection string.
+   - Add `JWT_SECRET`: A long, random string.
+   - Add `ENCRYPTION_KEY`: A 32-character string for AES-256 data encryption.
+5. **IP Whitelisting**:
+   - In MongoDB Atlas, go to **Network Access** and select **"Allow Access from Anywhere"** (0.0.0.0/0) to allow Vercel to connect.
 6. **Deploy**:
-   - Vercel will run `prisma generate` and `next build`.
-   - You can run `npx prisma db push` or `npx prisma migrate deploy` via the Vercel CLI or as a build step to sync the schema.
+   - Vercel will automatically run `prisma generate` and `next build`.
+
 
 ## 🛠 Local Development
 

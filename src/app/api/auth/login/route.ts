@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     console.error('Login error:', error);
     // Return a more descriptive error if it's likely a database connection issue
     if (error.message?.includes('database') || error.code?.startsWith('P')) {
-      return NextResponse.json({ error: 'Database connection error. Ensure you set a real DATABASE_URL (Postgres/MySQL) on Vercel.' }, { status: 500 });
+      return NextResponse.json({ error: 'Database connection error. Ensure you set a real DATABASE_URL (MongoDB) on Vercel and ensure your IP is whitelisted (0.0.0.0/0).' }, { status: 500 });
     }
     return NextResponse.json({ error: 'Internal system error' }, { status: 500 });
   }
